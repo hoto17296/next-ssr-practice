@@ -7,3 +7,6 @@ build:
       - npm run build
 run: 
   command: npm start
+  env:
+    - name: SITENAME
+      value: Next.js SSR Practice (Production)

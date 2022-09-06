@@ -5,19 +5,28 @@ interface Entry {
 const dummyEntries: Entry[] = [{ title: 'foo' }, { title: 'bar' }]
 
 export async function getServerSideProps() {
-  return { props: { entries: dummyEntries } }
+  return {
+    props: {
+      sitename: process.env.SITENAME,
+      entries: dummyEntries,
+    },
+  }
 }
 
 interface HomePageProps {
+  sitename: string
   entries: Entry[]
 }
 
-export default function Home({ entries }: HomePageProps) {
+export default function Home({ sitename, entries }: HomePageProps) {
   return (
-    <ul>
-      {entries.map((entry, idx) => (
-        <li key={idx}>{entry.title}</li>
-      ))}
-    </ul>
+    <>
+      <h1>{sitename}</h1>
+      <ul>
+        {entries.map((entry, idx) => (
+          <li key={idx}>{entry.title}</li>
+        ))}
+      </ul>
+    </>
   )
 }
